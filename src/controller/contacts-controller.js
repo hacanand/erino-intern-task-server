@@ -4,6 +4,7 @@ const contactRepository = new ContactRepository();
 const getAllContacts = async (req, res) => {
     try {
         const contacts = await contactRepository.getAllContacts();
+
         res.status(200).json({
             success: true,
             data: contacts,
@@ -22,6 +23,16 @@ const getAllContacts = async (req, res) => {
 
 const createContact = async (req, res) => {
     try {
+        // check duplicate email
+        const checkContact = await contactRepository.findContactByEmail(req.body.email);
+        if (checkContact) {
+          return res.status(400).json({
+            success: false,
+            data: {},
+            err: {},
+            message: "Email already exists",
+          });
+        }
         const contact = await contactRepository.createContact(req.body);
         res.status(201).json({
             success: true,

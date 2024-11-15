@@ -30,6 +30,16 @@ class ContactRepository{
         catch (err) {
             throw err;
         }
-    }          
+    }
+    async findContactByEmail(email) {
+        try {
+            return await Contact.findOne({
+                email: email
+            });
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 module.exports = ContactRepository;
