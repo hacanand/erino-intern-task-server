@@ -55,6 +55,7 @@ const createContact = async (req, res) => {
 
 const updateContact = async (req, res) => {
   try {
+    // console.log(req.body)
     const contact = await contactRepository.updateContact(
       req.params.id,
       req.body
@@ -76,7 +77,9 @@ const updateContact = async (req, res) => {
 };
 const deleteContact = async (req, res) => {
   try {
+    
     const contact = await contactRepository.deleteContact(req.params.id);
+   
     res.status(200).json({
       success: true,
       data: contact,
@@ -84,6 +87,7 @@ const deleteContact = async (req, res) => {
       message: "Contact deleted successfully",
     });
   } catch (error) {
+    console.log(req.params.id);
     res.status(500).json({
       success: false,
       data: {},

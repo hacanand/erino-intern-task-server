@@ -18,7 +18,7 @@ class ContactRepository{
     }
     async updateContact(id, contact) {
         try {
-            return await Contact
+            return await Contact.findByIdAndUpdate(id, contact, { new: true });
         } catch (err) {
             throw err;
         }

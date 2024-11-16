@@ -4,15 +4,17 @@ const bodyParser = require("body-parser");
 const connectDB = require("./dbconnect");
 const routes = require("./src/routes/index");
 const dotenv = require("dotenv");
+const morgan=require('morgan')
 dotenv.config();
 const app = express();
+app.use(morgan('dev'))
 var cors = require("cors");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: "*",
-    methods: ["GET", "POST", "DELETE", "PATCH"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
 );
